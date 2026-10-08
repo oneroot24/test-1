@@ -1,0 +1,6 @@
+const form=document.getElementById('leadForm'),success=document.getElementById('success'),wa=document.getElementById('waSuccess');
+function track(name,data={}){if(typeof fbq==='function')fbq('track',name,data);if(typeof gtag==='function')gtag('event',name,data)}
+document.querySelectorAll('[data-event]').forEach(a=>a.addEventListener('click',()=>track(a.dataset.event)));
+const p=new URLSearchParams(location.search);['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid'].forEach(k=>{if(p.get(k))sessionStorage.setItem(k,p.get(k))});
+form.addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(form).entries());track('Lead',{content_name:'B.Tech Credit Transfer',branch:d.branch,status:d.status});const msg=`Hi Elite Education, I want to check my B.Tech credit transfer eligibility.%0A%0AName: ${encodeURIComponent(d.name)}%0AMobile: ${encodeURIComponent(d.phone)}%0ABranch: ${encodeURIComponent(d.branch)}%0AStatus: ${encodeURIComponent(d.status)}`;wa.href=`https://wa.me/919400771970?text=${msg}`;form.style.display='none';success.style.display='block'});
+wa.addEventListener('click',()=>track('Contact',{method:'whatsapp',content_name:'B.Tech Credit Transfer'}));
